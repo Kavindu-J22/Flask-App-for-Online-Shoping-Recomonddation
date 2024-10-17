@@ -1,0 +1,117 @@
+/* ItemDetails.css */
+.item-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background for item details */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff4d4d; /* Red color for error */
+}
+
+.item-title {
+  font-size: 2rem;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.item-image {
+  width: 40%; /* Responsive image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.item-description {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #555;
+}
+
+.item-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #5a115a; /* Bootstrap primary color */
+  margin: 15px 0;
+}
+
+.add-to-cart-btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #410941;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #631363; /* Darker shade on hover */
+}
+
+.reviews-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.review-item {
+  background: #f5f0f4;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 7px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.199);
+}
+
+.review-title,
+.review-description,
+.review-rating {
+  margin: 0;
+  color: #333;
+}
+
+.rating-icon {
+  font-size: 20px; /* Adjust icon size */
+  margin-left: 5px; /* Spacing between text and icon */
+}
+
+/* ItemDetails.css */
+.icon {
+  font-size: 1.5rem; /* Size of the icons */
+  margin-left: 5px; /* Space between text and icon */
+}
+
+.recommended {
+  color: #28a745; /* Green color for recommended */
+}
+
+.not-recommended {
+  color: #dc3545; /* Red color for not recommended */
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .item-details {
+    padding: 15px;
+  }
+
+  .item-title {
+    font-size: 1.5rem;
+  }
+
+  .item-price {
+    font-size: 1.2rem;
+  }
+
+  .add-to-cart-btn {
+    font-size: 0.9rem;
+  }
+}
