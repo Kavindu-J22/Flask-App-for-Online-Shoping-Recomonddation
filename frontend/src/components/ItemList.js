@@ -44,7 +44,7 @@ const ItemList = () => {
       />
       
       <p className="item-count">
-        {filteredItems.length} {filteredItems.length === 1 ? 'item' : 'items'} found.
+        {filteredItems.length} {filteredItems.length === 1 ? 'item' : 'items'} found ✅.
       </p>
       
       <div className="card-container">
