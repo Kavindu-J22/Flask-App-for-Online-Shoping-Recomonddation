@@ -8,33 +8,38 @@ const ReviewForm = ({ itemId }) => {
   const [rating, setRating] = useState(null);
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (rating === null) {
-      setMessage("Please select a recommendation option.");
-      return;
-    }
 
     const reviewData = {
       title,
-      description,
-      rating
+      review_text: description, // Updated to match Flask API
     };
 
-    // Send a POST request to the API to add the review for the specific item
-    axios.post(`/api/items/${itemId}/review`, reviewData)
-      .then(res => {
-        alert('Review added successfully!');
-        setTitle('');
-        setDescription('');
-        setRating(null);
-        setMessage('');
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Error adding review');
+    try {
+      // Send a POST request to the API to get the prediction
+      const response = await axios.post('http://127.0.0.1:5001/predict', reviewData);
+
+      // Set the rating based on the response from the Flask app
+      const prediction = response.data.prediction === "Recommended" ? 1 : 0;
+      setRating(prediction);
+
+      // Now send the review with the title, description, and received rating to the database
+      await axios.post(`/api/items/${itemId}/review`, {
+        title,
+        description,
+        rating: prediction, // Sending the received rating
       });
+
+      alert('Review added successfully!');
+      setTitle('');
+      setDescription('');
+      setRating(null);
+      setMessage('');
+    } catch (err) {
+      console.error(err);
+      alert('Error adding review');
+    }
   };
 
   return (
@@ -53,26 +58,6 @@ const ReviewForm = ({ itemId }) => {
         placeholder="Write your review here..."
         required
       />
-      <div className="rating-container">
-        <p className='ratethis'>Rate  this item ▶️ </p>
-
-        <span
-          className={`rating-icon ${rating === 1 ? 'selected' : ''}`}
-          onClick={() => setRating(1)}
-          role="button"
-          aria-label="Recommend"
-        >
-          👍 |
-        </span>
-        <span
-          className={`rating-icon ${rating === 0 ? 'selected' : ''}`}
-          onClick={() => setRating(0)}
-          role="button"
-          aria-label="Not Recommend"
-        >
-          👎
-        </span>
-      </div>
       {message && <p className="error-message">{message}</p>}
       <button type="submit">Submit Review</button>
     </form>
